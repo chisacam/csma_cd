@@ -7,8 +7,9 @@ public class Link implements Runnable {
         t.start();
     }
 
-    @Override
     public void run() {
+        while(clock.startTime.getAndIncrement() == 60000){
 
+        }
     }
 }
