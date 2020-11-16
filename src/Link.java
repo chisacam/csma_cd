@@ -1,6 +1,8 @@
 public class Link implements Runnable {
     Thread t;
-    public Link() {
+    CSMA clock;
+    public Link(CSMA clock) {
+        this.clock = clock;
         t = new Thread(this, "Link");
         t.start();
     }

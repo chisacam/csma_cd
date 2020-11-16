@@ -1,6 +1,8 @@
 public class Node implements Runnable {
     Thread t;
-    public Node(String name) {
+    CSMA clock;
+    public Node(String name, CSMA clock) {
+        this.clock = clock;
         t = new Thread(this, name);
         t.start();
     }

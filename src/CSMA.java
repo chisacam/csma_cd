@@ -2,12 +2,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CSMA {
     public static void main(String[] args) {
-        Link link = new Link();
-        Node[] node = new Node[4];
         long startTime = System.currentTimeMillis();
         AtomicBoolean isBusy = new AtomicBoolean(false);
+        CSMA clock = new CSMA();
+
+        Link link = new Link(clock);
+        Node[] node = new Node[4];
+
         for(int i = 0; i < 4; i++)
-            node[i] = new Node("Node" + Integer.toString(i));
+            node[i] = new Node("Node" + i, clock);
         try {
 // wait for stations to complete transmission
             for(int i = 0;i < 4;i++)
