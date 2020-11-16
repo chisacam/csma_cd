@@ -1,8 +1,8 @@
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.*;
 
 public class CSMA {
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
+        AtomicLong startTime = new AtomicLong();
         AtomicBoolean isBusy = new AtomicBoolean(false);
         CSMA clock = new CSMA();
 
