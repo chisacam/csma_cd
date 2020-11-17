@@ -22,7 +22,7 @@ public class Link implements Runnable {
             System.out.println(System.currentTimeMillis() - startTime + " " + "Reject: " + nodeName + " Data Send Request To " + target);
             return false;
         } else {
-            // 링크가 사용 가능한 경우 true, isBusy 또한 사용가능으로 변경
+            // 링크가 사용 가능한 경우 true, isBusy 또한 true로 변경해 사용불가로 변경
             System.out.println(System.currentTimeMillis() - startTime + " " + "Accept: " + nodeName + " Data Send Request To " + target);
             isBusy.set(true);
             sender = nodeName;
@@ -30,6 +30,7 @@ public class Link implements Runnable {
             return true;
         }
     }
+    // 노드에서 작업이 끝났음을 링크에게 알림
     public void alertFinish(String nodeName, String target) {
         System.out.println(System.currentTimeMillis() - startTime + " " + nodeName + " Data Send Finished To " + target);
     }
