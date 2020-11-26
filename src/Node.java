@@ -39,7 +39,7 @@ public class Node implements Runnable {
         try {
             FileWriter fw = new FileWriter(t.getName() + ".txt", false);
             BufferedWriter bw = new BufferedWriter(fw);
-            while(System.currentTimeMillis() - link.startTime <= 60000) { // 동작조건은 시작시간으로부터 1분간
+            while(link.isEnd.get()) { // 동작조건은 시작시간으로부터 1분간
                 if(!link.requestUseLink(t.getName(), target)){ // link 객체에 사용여부 질의
                     // 사용불가 상태일경우 backoff 반환 시간만큼 대기
                     try {
@@ -72,8 +72,8 @@ public class Node implements Runnable {
                             bw.write(System.currentTimeMillis() - link.startTime + " " + "Data Receive Finished from " + link.sender);
                             bw.newLine();
                         }
-                        link.isBusy.set(false);
-                        link.alertFinish(t.getName(), target);
+                        link.alertFinish();
+                        retryNum = 0;
                         target = list.get(rand.nextInt(3));
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -31,16 +31,30 @@ public class Link implements Runnable {
         }
     }
     // 노드에서 작업이 끝났음을 링크에게 알림
-    public void alertFinish(String nodeName, String target) {
-        System.out.println(System.currentTimeMillis() - startTime + " " + nodeName + " Data Send Finished To " + target);
+    public void alertFinish() {
+        System.out.println(System.currentTimeMillis() - startTime + " " + sender + " Data Send Finished To " + receiver);
+        isBusy.set(false);
     }
     public void run() {
         while(true){
             if(isEnd.get()) {
                 System.out.println("transmission completed.");
                 break;
+            } else {
+                if (System.currentTimeMillis() - startTime >= 60000) {
+                    isEnd.set(true)
+                }
             }
         }
 
+    }
+
+    public static void main(String[] args) {
+        Link link = new Link();
+        try {
+            link.t.join();
+        }catch(Exception e) {
+            System.out.println(e);
+        }
     }
 }
